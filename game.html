@@ -18,41 +18,6 @@ $(document).ready(function(){
 	var gameOptions = ["Papir", "Kamen", "Makaze"];
 	
 	
-	//$("#game").hide();
-
-	$("#login").on("submit", function(){
-  	 $("#game").show();
-  	 $("#loginPane").hide();
-
-  	 playerName =  $("#playerName").val();
-  	 
-  	 $("#player1name").html(playerName);
-
-  	 loadResult (playerName);
-  	 
-  	 $("#endGame").show();
-
-  	 return false;
- 	})
-
-
-
-
-$("#endGame").click(function(){
-	 var result = parseInt ($("#playerScore1").html());
-     saveResult (playerName,result);
-     $("#game").hide();
-  	 $("#loginPane").show();
-  	 $("#playerName").val('');
-  	 $("#playerName").focus();
-  	 $("#playerScore1").html('0');
-  	 $("#playerScore2").html('0');
-  	 $("#message").html('');
-  	 $("#endGame").hide();
-
-});
-
-
 	//setInterval(rotateImages('#player1choice',gameOptions), 3000);	
     
     $("#play").click(function(){
@@ -65,22 +30,20 @@ $("#endGame").click(function(){
     	$("#message").html('');
 
     	//play game
-    	output = playGame(gameOptions,playerName,'Computer');
+    	output = playGame(gameOptions);
 
     	//get outcome
     	outcome = output[0];
     	player1 = output[1];
     	player2 = output[2];
-    	message = output[3];
+
 
 
         //display outcome and result
         $("#play").prop('value', 'Play again');
 
-        
-		$("#player1choice").attr('src','img/'+player1+'.png');
-
-		$("#player2choice").attr('src','img/'+player2+'.png');
+		$("#player1").html('<img src="img/' + player1 + '.png">');
+		$("#player2").html('<img src="img/' + player2 + '.png">');
 
         $("#message").append(message);
 
@@ -107,19 +70,13 @@ $("#endGame").click(function(){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 <div class="container">
-	<div class="row" id="game">
+	<div class="row">
 		<section class="col-md-12 text-center">
 			<h1>Two player game</h1>
 		</section>
 		<section class="col-md-12 text-center outcome">
-			<section class="col-md-6 text-center" id="player1">
-				<div id="player1name"></div>
-				<img src="img/Kamen.png" id="player1choice">
-			</section>
-			<section class="col-md-6 text-center" id="player2">
-				<div id="player2name">Computer</div>
-				<img src="img/Makaze.png" id="player2choice">
-			</section>
+			<section class="col-md-6 text-center" id="player1"><img src="img/Kamen.png" id="player1choice"></section>
+			<section class="col-md-6 text-center" id="player2"><img src="img/Makaze.png"></section>
 		</section>
 		<section class="col-md-12 text-center message">
 			<p id="message"></p>
@@ -136,21 +93,6 @@ $("#endGame").click(function(){
 
 
 	</div>
-	<div class="row" id="loginPane">
-		<section class="col-md-12 text-center">
-			<h1>Enter your name:</h1>
-			<form id="login">
-			<input type="text" id="playerName"></input>
-			<form>
-		</section>
-
-	</div>
-
-	<div class="row"> <section class="col-md-12 text-center"><input type="button" id="endGame" value="Finish game"></section></div>
-
-
-
-
 </div>
 
 </body>
