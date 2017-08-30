@@ -2,46 +2,77 @@
 
 <head>
 	<title>Papir - Kamen - Makaze</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
-	
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
 
 <script>
 $(document).ready(function(){
     $("#play").click(function(){
         
-    	//
+    	//clear message and result display
+    	$("#result").html('');
+    	$("#message").html('');
+
+    	//available options
     	var options = ["Papir", "Kamen", "Makaze"];
+        
+    	//play
         var player1 = options[Math.floor(Math.random()*options.length)];
         var player2 = options[Math.floor(Math.random()*options.length)];
 
+        //decide who wins if not even
         if (player1 != player2){
 			switch(player1) {
     			case "Papir":
-       				 if (player2 == "Kamen") outcome = "Player 1 wins";
-       				 if (player2 == "Makaze") outcome = "Player 2 wins;"
+       				 if (player2 == "Kamen") outcome = 1;
+       				 if (player2 == "Makaze") outcome = 2;
        				 break;
     			
 				case "Kamen":
-       				 if (player2 == "Makaze") outcome = "Player 1 wins";
-       				 if (player2 == "Papir") outcome = "Player 2 wins;"
+       				 if (player2 == "Makaze") outcome = 1;
+       				 if (player2 == "Papir") outcome = 2;
        				 break;	
 
     			case "Makaze":
-       				 if (player2 == "Kamen") outcome = "Player 2 wins";
-       				 if (player2 == "Papir") outcome = "Player 1 wins;"
+       				 if (player2 == "Papir") outcome = 1;
+       				 if (player2 == "Kamen") outcome = 2;
        				 break;
 
     		}
-
+    		message = 'Player ' +  outcome  + ' wins';
 
         }
         
-        else outcome = "Nereseno";
+        //if even do not decide
+        else {
+
+        	outcome = 0;
+        	message = "Even";
+
+        }	
+
+
+        //display outcome and result
+
         $("#play").prop('value', 'Play again');
 
-		$("p").html(player1 + '  ' + player2);
-        $("p").append(outcome);
+		$("#player1").html('Player 1:' + player1);
+		$("#player2").html('Player 2:' + player2);
+
+        $("#message").append(message);
+
+       	//add score to the scoreboard
+       	var winner = "#playerScore"+outcome;
+       	var p1 = $(winner).html();
+       	var newResult = parseInt(p1) + 1;
+       	$(winner).html(newResult) ;
+
+
+
     });
 });
 
@@ -51,8 +82,32 @@ $(document).ready(function(){
 
 
 <body>
-	<p>Two player game</p>
-<input type="button" id="play" value="Play game">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<div class="container">
+	<div class="row">
+		<section class="col-md-12 text-center">
+			<h1>Two player game</h1>
+		</section>
+		<section class="col-md-12 text-center outcome">
+			<section class="col-md-6 text-center" id="player1"></section>
+			<section class="col-md-6 text-center" id="player2"></section>
+		</section>
+		<section class="col-md-12 text-center message">
+			<p id="message"></p>
+		</section>
+		<section class="col-md-12 text-center">
+			<input type="button" id="play" value="Play game">
+		</section>
+
+		<section class = "col-md-12 results">
+			<section class="col-md-6 text-center" id="playerScore1">0</section>
+			<section class="col-md-6 text-center" id="playerScore2">0</section>
+		</section>
+
+
+	</div>
+</div>
 
 </body>
 
