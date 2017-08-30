@@ -17,44 +17,13 @@ $(document).ready(function(){
     	$("#result").html('');
     	$("#message").html('');
 
-    	//available options
-    	var options = ["Papir", "Kamen", "Makaze"];
-        
-    	//play
-        var player1 = options[Math.floor(Math.random()*options.length)];
-        var player2 = options[Math.floor(Math.random()*options.length)];
+    	//play game
+    	output = playGame();
 
-        //decide who wins if not even
-        if (player1 != player2){
-			switch(player1) {
-    			case "Papir":
-       				 if (player2 == "Kamen") outcome = 1;
-       				 if (player2 == "Makaze") outcome = 2;
-       				 break;
-    			
-				case "Kamen":
-       				 if (player2 == "Makaze") outcome = 1;
-       				 if (player2 == "Papir") outcome = 2;
-       				 break;	
-
-    			case "Makaze":
-       				 if (player2 == "Papir") outcome = 1;
-       				 if (player2 == "Kamen") outcome = 2;
-       				 break;
-
-    		}
-    		message = 'Player ' +  outcome  + ' wins';
-
-        }
-        
-        //if even do not decide
-        else {
-
-        	outcome = 0;
-        	message = "Even";
-
-        }	
-
+    	//get outcome
+    	outcome = output[0];
+    	player1 = output[1];
+    	player2 = output[2];
 
         //display outcome and result
 
@@ -100,7 +69,8 @@ $(document).ready(function(){
 			<input type="button" id="play" value="Play game">
 		</section>
 
-		<section class = "col-md-12 results">
+		<section class = "col-md-12 results text-center">
+		<h1>Results</h1>
 			<section class="col-md-6 text-center" id="playerScore1">0</section>
 			<section class="col-md-6 text-center" id="playerScore2">0</section>
 		</section>
