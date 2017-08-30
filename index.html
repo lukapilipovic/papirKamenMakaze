@@ -13,20 +13,24 @@
 $(document).ready(function(){
     $("#play").click(function(){
         
+    	//gameOptions
+    	var gameOptions = ["Papir", "Kamen", "Makaze"];
+
     	//clear message and result display
     	$("#result").html('');
     	$("#message").html('');
 
     	//play game
-    	output = playGame();
+    	output = playGame(gameOptions);
 
     	//get outcome
     	outcome = output[0];
     	player1 = output[1];
     	player2 = output[2];
 
-        //display outcome and result
 
+
+        //display outcome and result
         $("#play").prop('value', 'Play again');
 
 		$("#player1").html('Player 1:' + player1);

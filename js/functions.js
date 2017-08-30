@@ -1,8 +1,8 @@
 
-    function playGame() {
+    function playGame(gameOptions) {
 
     	//available options
-    	var options = ["Papir", "Kamen", "Makaze"];
+    	var options = gameOptions;
         
     	//play
         var player1 = options[Math.floor(Math.random()*options.length)];
@@ -27,7 +27,7 @@
        				 break;
 
     		}
-    		
+    		message = 'Player ' + outcome + ' wins' ;
 
         }
         
@@ -35,11 +35,11 @@
         else {
 
         	outcome = 0;
-        	
+        	message = 'Even, play again!' ;
 
         }	
 
-        output = new Array(outcome, player1, player2);
+        output = new Array(outcome, player1, player2, message);
         console.log(output);
         return output;
     }
